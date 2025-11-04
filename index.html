@@ -1,301 +1,312 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AUS — Find Meaning in Your Minutes</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="AUS — 'Are You Satisfied?' A logotherapy-inspired productivity app that helps you reflect often, notice meaning, and work truer." />
+  <title>AUS — Find Meaning in Your Minutes</title>
 
-        body {
-            font-family: 'Georgia', serif;
-            line-height: 1.8;
-            color: #2c3e50;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            overflow-x: hidden;
-        }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+  <style>
+    :root{
+      --bg-1: #f6f8fb;
+      --bg-2: #e6eef9;
+      --accent-1: #5568f0; /* cool blue */
+      --accent-2: #7b4db3; /* purple */
+      --muted: #55606b;
+      --card: #ffffff;
+      --glass: rgba(255,255,255,0.66);
+      --radius: 14px;
+      --container: 1100px;
+      color-scheme: light;
+      --shadow: 0 10px 30px rgba(28,40,60,0.08);
+      --soft-shadow: 0 6px 20px rgba(28,40,60,0.06);
+    }
 
-        header {
-            text-align: center;
-            padding: 80px 20px 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
+    @media (prefers-color-scheme: dark) {
+      :root{
+        --bg-1: #071027;
+        --bg-2: #0d1930;
+        --card: rgba(10,18,30,0.6);
+        --glass: rgba(255,255,255,0.03);
+        --muted: #b8c6db;
+        --shadow: 0 12px 30px rgba(0,0,0,0.6);
+        --soft-shadow: 0 6px 20px rgba(0,0,0,0.45);
+      }
+      body { color: #e7eefb; }
+    }
 
-        header::before {
-            content: '🌱';
-            position: absolute;
-            font-size: 150px;
-            opacity: 0.1;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
+    *{ box-sizing: border-box; margin: 0; padding: 0; }
+    html,body{ height:100%; }
+    body{
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+      color:var(--muted);
+      padding-bottom:60px;
+    }
 
-        h1 {
-            font-size: 3em;
-            font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
+    .wrap{ max-width:var(--container); margin: 36px auto; padding: 24px; }
 
-        .subtitle {
-            font-size: 1.3em;
-            font-weight: 300;
-            opacity: 0.95;
-            position: relative;
-            z-index: 1;
-        }
+    header.site-hero{
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: white;
+      border-radius: var(--radius);
+      padding: clamp(28px, 6vw, 64px);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      align-items: center;
+      overflow: hidden;
+    }
+    header .brand {
+      display:flex; gap:16px; align-items:center;
+    }
+    .logo {
+      width:68px; height:68px; flex:0 0 68px;
+      border-radius:16px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+      display:grid; place-items:center;
+      font-weight:700; font-family:"Merriweather", serif; font-size:24px;
+      box-shadow: var(--soft-shadow);
+    }
+    header h1{ font-family: "Merriweather", serif; font-weight:700; font-size: clamp(28px, 4.3vw, 40px); margin-bottom:6px; letter-spacing:0.4px; }
+    header p.lead{ opacity:0.96; margin-bottom:18px; font-size:1.05rem; max-width:54ch; }
 
-        section {
-            background: white;
-            margin: 40px 0;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    .hero-cta { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+    .btn {
+      background:white; color:var(--accent-2); padding:10px 16px; border-radius:10px; font-weight:600; border:none;
+      cursor:pointer; box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+    .btn.secondary {
+      background: transparent; color: rgba(255,255,255,0.92); border: 1px solid rgba(255,255,255,0.12);
+    }
 
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
-        }
+    /* Main two-column layout */
+    main { margin-top: 28px; display:grid; grid-template-columns: 1fr 360px; gap: 28px; align-items:start; }
 
-        h2 {
-            color: #667eea;
-            font-size: 2em;
-            margin-bottom: 25px;
-            font-weight: 400;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-            display: inline-block;
-        }
+    /* Left column content */
+    article.card{
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: clamp(20px, 3.5vw, 36px);
+      box-shadow: var(--soft-shadow);
+    }
+    article h2{ color:var(--accent-1); font-size:1.35rem; margin-bottom:12px; }
+    .intro { font-family: "Merriweather", serif; color: var(--muted); font-size:1.05rem; margin-bottom:18px; line-height:1.75; }
+    .question {
+      background: linear-gradient(90deg, rgba(123,77,179,0.08), rgba(85,104,240,0.06));
+      border-radius: 10px; padding: 18px; text-align:center; margin: 18px 0;
+      font-weight:600; color: var(--accent-2);
+    }
 
-        .intro {
-            font-size: 1.15em;
-            line-height: 2;
-            color: #34495e;
-            font-style: italic;
-        }
+    ul.features{ list-style:none; margin-top:10px; padding-left:0; display:grid; gap:10px; }
+    ul.features li{ padding:12px; border-radius:10px; background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01)); display:flex; gap:12px; align-items:flex-start; }
+    .feature-icon{ width:36px; height:36px; border-radius:8px; display:grid; place-items:center; background:var(--glass); flex-shrink:0; color:var(--accent-1); font-weight:700; }
 
-        .question-highlight {
-            font-size: 1.4em;
-            text-align: center;
-            color: #764ba2;
-            font-weight: 500;
-            padding: 30px;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border-radius: 10px;
-            margin: 30px 0;
-            box-shadow: 0 5px 20px rgba(118, 75, 162, 0.2);
-        }
+    .muted-note { color: #6b7280; font-size:0.95rem; margin-top:14px; }
 
-        ul {
-            list-style: none;
-            padding-left: 0;
-            margin: 25px 0;
-        }
+    /* Right column - aside */
+    aside.panel{
+      position: sticky; top: 28px;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding:18px; box-shadow: var(--soft-shadow);
+    }
+    aside h3{ color:var(--accent-2); margin-bottom:8px; }
+    .stat { font-size:1.6rem; font-weight:700; color:var(--accent-1); }
+    .small { color: #567; font-size:0.95rem; margin-top:6px; }
 
-        li {
-            padding: 15px 0 15px 40px;
-            position: relative;
-            font-size: 1.05em;
-        }
+    /* Logotherapy section */
+    .principles{ display:grid; gap:10px; margin-top:8px; }
+    .principle { padding:12px; border-radius:10px; background: linear-gradient(180deg, rgba(85,104,240,0.05), rgba(123,77,179,0.03)); color:var(--muted); }
 
-        li::before {
-            content: '✦';
-            position: absolute;
-            left: 10px;
-            color: #667eea;
-            font-size: 1.2em;
-        }
+    /* CTA block */
+    .big-cta{
+      margin-top:22px; padding:18px; border-radius:12px; text-align:center;
+      background: linear-gradient(135deg, rgba(85,104,240,0.12), rgba(123,77,179,0.08));
+    }
+    .final-ask{ font-size:1.15rem; font-weight:600; margin-top:8px; color:var(--accent-2); }
 
-        .principle {
-            margin: 20px 0;
-        }
+    footer{
+      margin-top:34px; text-align:center; color:var(--muted);
+      font-size:0.95rem;
+    }
 
-        .principle strong {
-            color: #667eea;
-            font-size: 1.1em;
-        }
+    /* responsive */
+    @media (max-width: 980px){
+      header.site-hero { grid-template-columns: 1fr; text-align:center; }
+      main { grid-template-columns: 1fr; }
+      aside.panel{ position:relative; top:auto; }
+    }
 
-        .cta {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 15px;
-            margin: 40px 0;
-        }
+    /* accessibility: reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
 
-        .cta h2 {
-            color: white;
-            border: none;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-
-        .cta p {
-            font-size: 1.2em;
-            margin: 15px 0;
-            opacity: 0.95;
-        }
-
-        .final-question {
-            font-size: 1.6em;
-            font-weight: 500;
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background: #2c3e50;
-            color: white;
-            font-size: 1.1em;
-        }
-
-        footer strong {
-            color: #667eea;
-            font-size: 1.3em;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            section {
-                padding: 30px 20px;
-            }
-
-            h2 {
-                font-size: 1.5em;
-            }
-
-            .question-highlight {
-                font-size: 1.2em;
-                padding: 20px;
-            }
-        }
-
-        .fade-in {
-            animation: fadeIn 1s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    /* tiny utilities */
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background:#fff; padding:2px 8px; border-radius:6px; font-size:0.9rem; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+  </style>
 </head>
 <body>
-    <header class="fade-in">
-        <h1>AUS</h1>
-        <p class="subtitle">Find Meaning in Your Minutes</p>
+  <div class="wrap">
+
+    <header class="site-hero" role="banner" aria-label="AUS — Find Meaning in Your Minutes">
+      <div>
+        <div class="brand">
+          <div class="logo" aria-hidden="true">AUS</div>
+          <div>
+            <h1>AUS</h1>
+            <p class="lead">Find meaning in your minutes — a gentle, logotherapy-inspired prompt to make your work feel truer.</p>
+          </div>
+        </div>
+
+        <p style="margin-top:12px; max-width:60ch;">
+          AUS is a tiny daily companion that asks one question at intervals you choose. It helps you notice satisfaction, capture short notes, and discover the rhythm of purposeful work.
+        </p>
+
+        <div class="hero-cta" style="margin-top:16px;">
+          <button class="btn" onclick="location.href='#get-started'">Get started</button>
+          <button class="btn secondary" onclick="location.href='#why'">How it works</button>
+        </div>
+      </div>
+
+      <div aria-hidden="true" style="display:flex; align-items:center; justify-content:center;">
+        <!-- simple illustrative SVG -->
+        <svg width="240" height="180" viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="stylized question and check">
+          <rect x="0" y="0" width="240" height="180" rx="18" fill="rgba(255,255,255,0.06)"/>
+          <g transform="translate(40,14)">
+            <circle cx="80" cy="60" r="46" fill="white" opacity="0.06"></circle>
+            <path d="M78 26a22 22 0 1 0 22 22" stroke="white" stroke-opacity="0.95" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M78 78v10" stroke="white" stroke-opacity="0.95" stroke-width="8" stroke-linecap="round"/>
+            <path d="M10 128c20-22 46-34 78-34s58 12 78 34" stroke="white" stroke-opacity="0.06" stroke-width="10" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
     </header>
 
-    <div class="container">
-        <section class="fade-in">
-            <p class="intro">
-                In a world that rewards constant motion, AUS asks you to pause. It's not another productivity tracker — it's a quiet mirror. Every so often, AUS asks a single question:
-            </p>
-            <div class="question-highlight">
-                "Are you satisfied with how you've spent your time?"
-            </div>
-            <p class="intro">
-                That question is small, but it carries the weight of something deeper — your meaning.
-            </p>
-        </section>
+    <main>
+      <article class="card" id="why">
+        <h2>Why AUS?</h2>
+        <p class="intro">Most productivity tools count output. AUS measures alignment — whether your actions resonate with what actually matters to you.</p>
 
-        <section>
-            <h2>Why AUS?</h2>
-            <p>
-                Most productivity tools measure output — tasks done, hours logged, graphs filled. AUS takes a different approach. It measures alignment — whether what you're doing connects with what truly matters to you.
-            </p>
-            <p style="margin-top: 20px;">
-                AUS is inspired by Logotherapy, the psychological framework founded by Viktor Frankl. Frankl believed that our primary drive is not pleasure or power, but meaning. When we act in ways that align with our values, even ordinary work becomes purposeful.
-            </p>
-        </section>
+        <div class="question" aria-live="polite">“Are you satisfied with how you spent the last period?”</div>
 
-        <section>
-            <h2>How it Works</h2>
-            <ul>
-                <li><strong>Set your reflection window</strong> — choose when you'd like reminders (say, between 6 AM and 9 PM).</li>
-                <li><strong>Rate your satisfaction (1–5)</strong> when prompted — a simple gut-check, not a performance score.</li>
-                <li><strong>Write a quick note</strong> — what went well, or what could have been better.</li>
-                <li><strong>Over time, AUS helps you see the rhythm of your life</strong> — moments of flow, distraction, purpose, or drift.</li>
-            </ul>
-            <p style="text-align: center; font-size: 1.2em; margin-top: 30px; color: #764ba2; font-weight: 500;">
-                It's not about working more. It's about working truer.
-            </p>
-        </section>
+        <p>Inspired by <strong>Logotherapy</strong> — Viktor Frankl’s view that meaning, not pleasure or power, is our primary motivator — AUS turns tiny moments of reflection into a useful habit. Over time those moments reveal real patterns: what brings flow, what drains energy, and where small adjustments have big effects.</p>
 
-        <section>
-            <h2>Logotherapy in Action</h2>
-            <p>Every reminder in AUS is an invitation to practice Logotherapy's core principles:</p>
-            <div class="principle">
-                <p><strong>Freedom of attitude:</strong> You can't always control your circumstances, but you can choose your response.</p>
+        <ul class="features" aria-label="Key features">
+          <li>
+            <div class="feature-icon">✓</div>
+            <div>
+              <strong>One-click feedback</strong>
+              <div class="muted-note">Respond from the notification: rate 1–5 and add a short note.</div>
             </div>
-            <div class="principle">
-                <p><strong>Responsibility:</strong> Satisfaction grows when we take ownership of how we spend our moments.</p>
-            </div>
-            <div class="principle">
-                <p><strong>Meaning through action:</strong> Ordinary work becomes meaningful when done consciously.</p>
-            </div>
-            <p style="margin-top: 30px;">
-                By regularly reflecting on satisfaction, AUS helps you transform routine work into purposeful engagement.
-            </p>
-        </section>
+          </li>
 
-        <section>
-            <h2>A Philosophy for Modern Work</h2>
-            <p>
-                The best productivity isn't a race — it's a resonance. When you align effort with meaning, your energy becomes sustainable, your mind calmer, and your sense of direction sharper.
-            </p>
-            <p style="margin-top: 20px;">
-                AUS turns your day into a sequence of mindful checkpoints — not interruptions, but gentle prompts to return to what matters.
-            </p>
-        </section>
-
-        <div class="cta">
-            <h2>Join the Quiet Revolution</h2>
-            <p>AUS isn't about chasing success. It's about living deliberately.</p>
-            <p>With just one recurring question, you can train your mind to notice what fulfills you — and what doesn't.</p>
-            <p style="margin-top: 30px;">Start small. Reflect often.</p>
-            <div class="final-question">
-                Are you satisfied?
+          <li>
+            <div class="feature-icon">⏱</div>
+            <div>
+              <strong>Custom timing & window</strong>
+              <div class="muted-note">Choose your interval and active hours (default 6:00–21:00).</div>
             </div>
+          </li>
+
+          <li>
+            <div class="feature-icon">🔒</div>
+            <div>
+              <strong>Private by design</strong>
+              <div class="muted-note">All data stays local unless you choose to export it.</div>
+            </div>
+          </li>
+
+          <li>
+            <div class="feature-icon">📈</div>
+            <div>
+              <strong>Trend-friendly</strong>
+              <div class="muted-note">See satisfaction trends and quick notes that point to improvement opportunities.</div>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <aside class="panel" aria-labelledby="logotherapy">
+        <h3 id="logotherapy">Logotherapy in Action</h3>
+
+        <div class="principles" role="list">
+          <div class="principle" role="listitem"><strong>Freedom of attitude</strong><div class="small">You can shape your response even when you can't change circumstances.</div></div>
+          <div class="principle" role="listitem"><strong>Responsibility</strong><div class="small">Small choices about time compound into meaningful direction.</div></div>
+          <div class="principle" role="listitem"><strong>Meaning through action</strong><div class="small">Intentional actions make ordinary work become purpose-filled.</div></div>
         </div>
-    </div>
+
+        <div class="big-cta" style="margin-top:14px;">
+          <div class="stat">Start noticing</div>
+          <div class="final-ask">Work truer, not harder.</div>
+          <div style="margin-top:12px;"><button class="btn" id="get-started" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">Get the app</button></div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="card" style="margin-top:22px;">
+      <h2 id="how">How it works — quick</h2>
+      <ol style="margin-top:12px; padding-left:18px; color:var(--muted);">
+        <li style="margin-bottom:8px;"><strong>Choose</strong> — set your reminder interval and active window.</li>
+        <li style="margin-bottom:8px;"><strong>Reflect</strong> — receive a gentle prompt and rate 1–5. Add a short note if you want.</li>
+        <li style="margin-bottom:8px;"><strong>Learn</strong> — view trends and short notes to understand what helps or harms your focus.</li>
+      </ol>
+      <p class="muted-note">Tip: start with modest intervals (30–60 minutes). Reflection works better as a habit, not a punishment.</p>
+    </section>
+
+    <section class="card" id="get-started" style="margin-top:18px;">
+      <h2>Try AUS</h2>
+      <p style="margin-bottom:12px;">I’m building AUS as a small, privacy-first app. If you want early access, updates, or a demo APK, drop your email below — no spam, just small experiments.</p>
+
+      <form id="signup" onsubmit="handleSignup(event)" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <label for="email" class="sr-only" style="display:none">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@domain.com" required style="flex:1; min-width:200px; padding:10px; border-radius:10px; border:1px solid rgba(0,0,0,0.06)" />
+        <button type="submit" class="btn">Join early list</button>
+      </form>
+
+      <p id="signup-msg" aria-live="polite" style="margin-top:10px; color:var(--muted); font-size:0.95rem;"></p>
+
+      <p style="margin-top:16px;" class="muted-note">Or: <a href="mailto:hello@example.com" style="color:var(--accent-2); font-weight:600;">Email me</a> for an APK or collaboration.</p>
+    </section>
 
     <footer>
-        <p><strong>AUS</strong> — Align. Understand. Satisfy.</p>
-        <p style="margin-top: 10px; opacity: 0.9;">A simple app for meaningful productivity.</p>
+      <p><strong>AUS</strong> — Align. Understand. Satisfy.</p>
+      <p style="margin-top:6px; opacity:0.9;">A small experiment in logotherapy & mindful productivity. Built with care.</p>
     </footer>
+  </div>
+
+  <script>
+    // tiny form handler (no backend) — this will open user's email client as fallback
+    function handleSignup(e){
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      if(!email) return;
+      const msgEl = document.getElementById('signup-msg');
+      // best-effort: open mailto with body containing app interest
+      const subject = encodeURIComponent('AUS early access request');
+      const body = encodeURIComponent('Hi, I would like early access to AUS. My email: ' + email);
+      // show confirmation
+      msgEl.textContent = 'Thanks — opening your mail app so you can send a quick request. If nothing opens, email hello@example.com.';
+      setTimeout(()=> {
+        window.location.href = `mailto:hello@example.com?subject=${subject}&body=${body}`;
+      }, 600);
+    }
+
+    // small accessibility helper: hide .sr-only label (for screen readers)
+    (function(){
+      const style = document.createElement('style');
+      style.innerHTML = '.sr-only{ position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }';
+      document.head.appendChild(style);
+    })();
+  </script>
 </body>
 </html>
