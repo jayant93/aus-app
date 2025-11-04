@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUS — Find Meaning in Your Minutes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '🌱';
+            position: absolute;
+            font-size: 150px;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            font-weight: 300;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            background: white;
+            margin: 40px 0;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 25px;
+            font-weight: 400;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .intro {
+            font-size: 1.15em;
+            line-height: 2;
+            color: #34495e;
+            font-style: italic;
+        }
+
+        .question-highlight {
+            font-size: 1.4em;
+            text-align: center;
+            color: #764ba2;
+            font-weight: 500;
+            padding: 30px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 5px 20px rgba(118, 75, 162, 0.2);
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 25px 0;
+        }
+
+        li {
+            padding: 15px 0 15px 40px;
+            position: relative;
+            font-size: 1.05em;
+        }
+
+        li::before {
+            content: '✦';
+            position: absolute;
+            left: 10px;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .principle {
+            margin: 20px 0;
+        }
+
+        .principle strong {
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .cta {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+
+        .cta h2 {
+            color: white;
+            border: none;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2em;
+            margin: 15px 0;
+            opacity: 0.95;
+        }
+
+        .final-question {
+            font-size: 1.6em;
+            font-weight: 500;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #2c3e50;
+            color: white;
+            font-size: 1.1em;
+        }
+
+        footer strong {
+            color: #667eea;
+            font-size: 1.3em;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            section {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .question-highlight {
+                font-size: 1.2em;
+                padding: 20px;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="fade-in">
+        <h1>AUS</h1>
+        <p class="subtitle">Find Meaning in Your Minutes</p>
+    </header>
+
+    <div class="container">
+        <section class="fade-in">
+            <p class="intro">
+                In a world that rewards constant motion, AUS asks you to pause. It's not another productivity tracker — it's a quiet mirror. Every so often, AUS asks a single question:
+            </p>
+            <div class="question-highlight">
+                "Are you satisfied with how you've spent your time?"
+            </div>
+            <p class="intro">
+                That question is small, but it carries the weight of something deeper — your meaning.
+            </p>
+        </section>
+
+        <section>
+            <h2>Why AUS?</h2>
+            <p>
+                Most productivity tools measure output — tasks done, hours logged, graphs filled. AUS takes a different approach. It measures alignment — whether what you're doing connects with what truly matters to you.
+            </p>
+            <p style="margin-top: 20px;">
+                AUS is inspired by Logotherapy, the psychological framework founded by Viktor Frankl. Frankl believed that our primary drive is not pleasure or power, but meaning. When we act in ways that align with our values, even ordinary work becomes purposeful.
+            </p>
+        </section>
+
+        <section>
+            <h2>How it Works</h2>
+            <ul>
+                <li><strong>Set your reflection window</strong> — choose when you'd like reminders (say, between 6 AM and 9 PM).</li>
+                <li><strong>Rate your satisfaction (1–5)</strong> when prompted — a simple gut-check, not a performance score.</li>
+                <li><strong>Write a quick note</strong> — what went well, or what could have been better.</li>
+                <li><strong>Over time, AUS helps you see the rhythm of your life</strong> — moments of flow, distraction, purpose, or drift.</li>
+            </ul>
+            <p style="text-align: center; font-size: 1.2em; margin-top: 30px; color: #764ba2; font-weight: 500;">
+                It's not about working more. It's about working truer.
+            </p>
+        </section>
+
+        <section>
+            <h2>Logotherapy in Action</h2>
+            <p>Every reminder in AUS is an invitation to practice Logotherapy's core principles:</p>
+            <div class="principle">
+                <p><strong>Freedom of attitude:</strong> You can't always control your circumstances, but you can choose your response.</p>
+            </div>
+            <div class="principle">
+                <p><strong>Responsibility:</strong> Satisfaction grows when we take ownership of how we spend our moments.</p>
+            </div>
+            <div class="principle">
+                <p><strong>Meaning through action:</strong> Ordinary work becomes meaningful when done consciously.</p>
+            </div>
+            <p style="margin-top: 30px;">
+                By regularly reflecting on satisfaction, AUS helps you transform routine work into purposeful engagement.
+            </p>
+        </section>
+
+        <section>
+            <h2>A Philosophy for Modern Work</h2>
+            <p>
+                The best productivity isn't a race — it's a resonance. When you align effort with meaning, your energy becomes sustainable, your mind calmer, and your sense of direction sharper.
+            </p>
+            <p style="margin-top: 20px;">
+                AUS turns your day into a sequence of mindful checkpoints — not interruptions, but gentle prompts to return to what matters.
+            </p>
+        </section>
+
+        <div class="cta">
+            <h2>Join the Quiet Revolution</h2>
+            <p>AUS isn't about chasing success. It's about living deliberately.</p>
+            <p>With just one recurring question, you can train your mind to notice what fulfills you — and what doesn't.</p>
+            <p style="margin-top: 30px;">Start small. Reflect often.</p>
+            <div class="final-question">
+                Are you satisfied?
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>AUS</strong> — Align. Understand. Satisfy.</p>
+        <p style="margin-top: 10px; opacity: 0.9;">A simple app for meaningful productivity.</p>
+    </footer>
+</body>
+</html>
