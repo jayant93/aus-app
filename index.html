@@ -14,8 +14,8 @@
     :root{
       --bg-1: #f6f8fb;
       --bg-2: #e6eef9;
-      --accent-1: #5568f0; /* cool blue */
-      --accent-2: #7b4db3; /* purple */
+      --accent-1: #5568f0;
+      --accent-2: #7b4db3;
       --muted: #55606b;
       --card: #ffffff;
       --glass: rgba(255,255,255,0.66);
@@ -53,6 +53,47 @@
 
     .wrap{ max-width:var(--container); margin: 36px auto; padding: 24px; }
 
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes draw {
+      from { stroke-dashoffset: 200; }
+      to { stroke-dashoffset: 0; }
+    }
+
     header.site-hero{
       background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
       color: white;
@@ -64,9 +105,11 @@
       gap: 24px;
       align-items: center;
       overflow: hidden;
+      animation: fadeInUp 0.8s ease-out;
     }
     header .brand {
       display:flex; gap:16px; align-items:center;
+      animation: slideInLeft 0.8s ease-out 0.2s both;
     }
     .logo {
       width:68px; height:68px; flex:0 0 68px;
@@ -75,21 +118,83 @@
       display:grid; place-items:center;
       font-weight:700; font-family:"Merriweather", serif; font-size:24px;
       box-shadow: var(--soft-shadow);
+      transition: transform 0.3s ease;
     }
-    header h1{ font-family: "Merriweather", serif; font-weight:700; font-size: clamp(28px, 4.3vw, 40px); margin-bottom:6px; letter-spacing:0.4px; }
-    header p.lead{ opacity:0.96; margin-bottom:18px; font-size:1.05rem; max-width:54ch; }
+    .logo:hover {
+      transform: rotate(5deg) scale(1.05);
+    }
+    header h1{ 
+      font-family: "Merriweather", serif; 
+      font-weight:700; 
+      font-size: clamp(28px, 4.3vw, 40px); 
+      margin-bottom:6px; 
+      letter-spacing:0.4px;
+    }
+    header p.lead{ 
+      opacity:0.96; 
+      margin-bottom:18px; 
+      font-size:1.05rem; 
+      max-width:54ch;
+    }
 
-    .hero-cta { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+    .hero-cta { 
+      display:flex; 
+      gap:12px; 
+      flex-wrap:wrap; 
+      align-items:center;
+    }
     .btn {
-      background:white; color:var(--accent-2); padding:10px 16px; border-radius:10px; font-weight:600; border:none;
-      cursor:pointer; box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      background:white; 
+      color:var(--accent-2); 
+      padding:10px 16px; 
+      border-radius:10px; 
+      font-weight:600; 
+      border:none;
+      cursor:pointer; 
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    }
+    .btn:active {
+      transform: translateY(0);
     }
     .btn.secondary {
-      background: transparent; color: rgba(255,255,255,0.92); border: 1px solid rgba(255,255,255,0.12);
+      background: transparent; 
+      color: rgba(255,255,255,0.92); 
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .btn.secondary:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    /* Animated SVG elements */
+    .hero-svg {
+      animation: slideInRight 0.8s ease-out 0.3s both;
+    }
+    .svg-question {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      animation: draw 1.2s ease-out 1s forwards;
+    }
+    .svg-circle {
+      animation: pulse 2s ease-in-out 2s infinite;
+    }
+    .svg-wave {
+      animation: float 3s ease-in-out infinite;
     }
 
     /* Main two-column layout */
-    main { margin-top: 28px; display:grid; grid-template-columns: 1fr 360px; gap: 28px; align-items:start; }
+    main { 
+      margin-top: 28px; 
+      display:grid; 
+      grid-template-columns: 1fr 360px; 
+      gap: 28px; 
+      align-items:start;
+    }
 
     /* Left column content */
     article.card{
@@ -97,27 +202,97 @@
       border-radius: var(--radius);
       padding: clamp(20px, 3.5vw, 36px);
       box-shadow: var(--soft-shadow);
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    article h2{ color:var(--accent-1); font-size:1.35rem; margin-bottom:12px; }
-    .intro { font-family: "Merriweather", serif; color: var(--muted); font-size:1.05rem; margin-bottom:18px; line-height:1.75; }
+    article.card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(28,40,60,0.12);
+    }
+    article h2{ 
+      color:var(--accent-1); 
+      font-size:1.35rem; 
+      margin-bottom:12px;
+    }
+    .intro { 
+      font-family: "Merriweather", serif; 
+      color: var(--muted); 
+      font-size:1.05rem; 
+      margin-bottom:18px; 
+      line-height:1.75;
+    }
     .question {
       background: linear-gradient(90deg, rgba(123,77,179,0.08), rgba(85,104,240,0.06));
-      border-radius: 10px; padding: 18px; text-align:center; margin: 18px 0;
-      font-weight:600; color: var(--accent-2);
+      border-radius: 10px; 
+      padding: 18px; 
+      text-align:center; 
+      margin: 18px 0;
+      font-weight:600; 
+      color: var(--accent-2);
+      animation: scaleIn 0.6s ease-out 0.8s both;
+      transition: transform 0.3s ease;
+    }
+    .question:hover {
+      transform: scale(1.02);
     }
 
-    ul.features{ list-style:none; margin-top:10px; padding-left:0; display:grid; gap:10px; }
-    ul.features li{ padding:12px; border-radius:10px; background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01)); display:flex; gap:12px; align-items:flex-start; }
-    .feature-icon{ width:36px; height:36px; border-radius:8px; display:grid; place-items:center; background:var(--glass); flex-shrink:0; color:var(--accent-1); font-weight:700; }
+    ul.features{ 
+      list-style:none; 
+      margin-top:10px; 
+      padding-left:0; 
+      display:grid; 
+      gap:10px;
+    }
+    ul.features li{ 
+      padding:12px; 
+      border-radius:10px; 
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01)); 
+      display:flex; 
+      gap:12px; 
+      align-items:flex-start;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out forwards;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    ul.features li:nth-child(1) { animation-delay: 1s; }
+    ul.features li:nth-child(2) { animation-delay: 1.15s; }
+    ul.features li:nth-child(3) { animation-delay: 1.3s; }
+    ul.features li:nth-child(4) { animation-delay: 1.45s; }
+    ul.features li:hover {
+      transform: translateX(6px);
+      background: linear-gradient(180deg, rgba(85,104,240,0.05), rgba(123,77,179,0.03));
+    }
+    .feature-icon{ 
+      width:36px; 
+      height:36px; 
+      border-radius:8px; 
+      display:grid; 
+      place-items:center; 
+      background:var(--glass); 
+      flex-shrink:0; 
+      color:var(--accent-1); 
+      font-weight:700;
+      transition: transform 0.3s ease;
+    }
+    ul.features li:hover .feature-icon {
+      transform: rotate(10deg) scale(1.1);
+    }
 
     .muted-note { color: #6b7280; font-size:0.95rem; margin-top:14px; }
 
     /* Right column - aside */
     aside.panel{
-      position: sticky; top: 28px;
+      position: sticky; 
+      top: 28px;
       background: var(--card);
       border-radius: var(--radius);
-      padding:18px; box-shadow: var(--soft-shadow);
+      padding:18px; 
+      box-shadow: var(--soft-shadow);
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+      transition: transform 0.3s ease;
+    }
+    aside.panel:hover {
+      transform: translateY(-4px);
     }
     aside h3{ color:var(--accent-2); margin-bottom:8px; }
     .stat { font-size:1.6rem; font-weight:700; color:var(--accent-1); }
@@ -125,18 +300,58 @@
 
     /* Logotherapy section */
     .principles{ display:grid; gap:10px; margin-top:8px; }
-    .principle { padding:12px; border-radius:10px; background: linear-gradient(180deg, rgba(85,104,240,0.05), rgba(123,77,179,0.03)); color:var(--muted); }
+    .principle { 
+      padding:12px; 
+      border-radius:10px; 
+      background: linear-gradient(180deg, rgba(85,104,240,0.05), rgba(123,77,179,0.03)); 
+      color:var(--muted);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .principle:hover {
+      transform: translateX(4px);
+      background: linear-gradient(180deg, rgba(85,104,240,0.08), rgba(123,77,179,0.05));
+    }
 
     /* CTA block */
     .big-cta{
-      margin-top:22px; padding:18px; border-radius:12px; text-align:center;
+      margin-top:22px; 
+      padding:18px; 
+      border-radius:12px; 
+      text-align:center;
       background: linear-gradient(135deg, rgba(85,104,240,0.12), rgba(123,77,179,0.08));
+      transition: transform 0.3s ease;
+    }
+    .big-cta:hover {
+      transform: scale(1.02);
     }
     .final-ask{ font-size:1.15rem; font-weight:600; margin-top:8px; color:var(--accent-2); }
 
+    /* Additional sections */
+    section.card {
+      animation: fadeInUp 0.8s ease-out 0.8s both;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    section.card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(28,40,60,0.12);
+    }
+
+    /* Form elements */
+    input[type="email"] {
+      transition: all 0.3s ease;
+    }
+    input[type="email"]:focus {
+      outline: none;
+      border-color: var(--accent-1) !important;
+      box-shadow: 0 0 0 3px rgba(85,104,240,0.1);
+    }
+
     footer{
-      margin-top:34px; text-align:center; color:var(--muted);
+      margin-top:34px; 
+      text-align:center; 
+      color:var(--muted);
       font-size:0.95rem;
+      animation: fadeIn 1s ease-out 1.2s both;
     }
 
     /* responsive */
@@ -148,11 +363,24 @@
 
     /* accessibility: reduce motion */
     @media (prefers-reduced-motion: reduce){
-      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      * { 
+        animation: none !important; 
+        transition: none !important; 
+        scroll-behavior: auto !important; 
+      }
+      ul.features li { opacity: 1; }
+      article.card, aside.panel, section.card, header.site-hero, header .brand, .hero-svg, footer { opacity: 1; }
     }
 
     /* tiny utilities */
-    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background:#fff; padding:2px 8px; border-radius:6px; font-size:0.9rem; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+    .kbd { 
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; 
+      background:#fff; 
+      padding:2px 8px; 
+      border-radius:6px; 
+      font-size:0.9rem; 
+      box-shadow:0 2px 8px rgba(0,0,0,0.06); 
+    }
   </style>
 </head>
 <body>
@@ -178,15 +406,14 @@
         </div>
       </div>
 
-      <div aria-hidden="true" style="display:flex; align-items:center; justify-content:center;">
-        <!-- simple illustrative SVG -->
+      <div class="hero-svg" aria-hidden="true" style="display:flex; align-items:center; justify-content:center;">
         <svg width="240" height="180" viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="stylized question and check">
           <rect x="0" y="0" width="240" height="180" rx="18" fill="rgba(255,255,255,0.06)"/>
           <g transform="translate(40,14)">
-            <circle cx="80" cy="60" r="46" fill="white" opacity="0.06"></circle>
-            <path d="M78 26a22 22 0 1 0 22 22" stroke="white" stroke-opacity="0.95" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M78 78v10" stroke="white" stroke-opacity="0.95" stroke-width="8" stroke-linecap="round"/>
-            <path d="M10 128c20-22 46-34 78-34s58 12 78 34" stroke="white" stroke-opacity="0.06" stroke-width="10" stroke-linecap="round"/>
+            <circle class="svg-circle" cx="80" cy="60" r="46" fill="white" opacity="0.06"></circle>
+            <path class="svg-question" d="M78 26a22 22 0 1 0 22 22" stroke="white" stroke-opacity="0.95" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="svg-question" d="M78 78v10" stroke="white" stroke-opacity="0.95" stroke-width="8" stroke-linecap="round" style="animation-delay: 1.2s"/>
+            <path class="svg-wave" d="M10 128c20-22 46-34 78-34s58 12 78 34" stroke="white" stroke-opacity="0.06" stroke-width="10" stroke-linecap="round"/>
           </g>
         </svg>
       </div>
@@ -197,9 +424,9 @@
         <h2>Why AUS?</h2>
         <p class="intro">Most productivity tools count output. AUS measures alignment — whether your actions resonate with what actually matters to you.</p>
 
-        <div class="question" aria-live="polite">“Are you satisfied with how you spent the last period?”</div>
+        <div class="question" aria-live="polite">"Are you satisfied with how you spent the last period?"</div>
 
-        <p>Inspired by <strong>Logotherapy</strong> — Viktor Frankl’s view that meaning, not pleasure or power, is our primary motivator — AUS turns tiny moments of reflection into a useful habit. Over time those moments reveal real patterns: what brings flow, what drains energy, and where small adjustments have big effects.</p>
+        <p>Inspired by <strong>Logotherapy</strong> — Viktor Frankl's view that meaning, not pleasure or power, is our primary motivator — AUS turns tiny moments of reflection into a useful habit. Over time those moments reveal real patterns: what brings flow, what drains energy, and where small adjustments have big effects.</p>
 
         <ul class="features" aria-label="Key features">
           <li>
@@ -265,7 +492,7 @@
 
     <section class="card" id="get-started" style="margin-top:18px;">
       <h2>Try AUS</h2>
-      <p style="margin-bottom:12px;">I’m building AUS as a small, privacy-first app. If you want early access, updates, or a demo APK, drop your email below — no spam, just small experiments.</p>
+      <p style="margin-bottom:12px;">I'm building AUS as a small, privacy-first app. If you want early access, updates, or a demo APK, drop your email below — no spam, just small experiments.</p>
 
       <form id="signup" onsubmit="handleSignup(event)" style="display:flex; gap:8px; flex-wrap:wrap;">
         <label for="email" class="sr-only" style="display:none">Email</label>
@@ -285,23 +512,19 @@
   </div>
 
   <script>
-    // tiny form handler (no backend) — this will open user's email client as fallback
     function handleSignup(e){
       e.preventDefault();
       const email = document.getElementById('email').value.trim();
       if(!email) return;
       const msgEl = document.getElementById('signup-msg');
-      // best-effort: open mailto with body containing app interest
       const subject = encodeURIComponent('AUS early access request');
       const body = encodeURIComponent('Hi, I would like early access to AUS. My email: ' + email);
-      // show confirmation
       msgEl.textContent = 'Thanks — opening your mail app so you can send a quick request. If nothing opens, email hello@example.com.';
       setTimeout(()=> {
         window.location.href = `mailto:hello@example.com?subject=${subject}&body=${body}`;
       }, 600);
     }
 
-    // small accessibility helper: hide .sr-only label (for screen readers)
     (function(){
       const style = document.createElement('style');
       style.innerHTML = '.sr-only{ position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }';
